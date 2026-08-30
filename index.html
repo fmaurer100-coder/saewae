@@ -15,7 +15,7 @@ body {
 }
 
 .container {
-    max-width: 700px;
+    max-width: 650px;
     margin: auto;
     padding: 25px;
 }
@@ -32,10 +32,23 @@ h1 {
     margin-top: 0;
 }
 
-.question-text {
-    font-size: 19px;
-    font-weight: bold;
-    margin-bottom: 15px;
+.notice {
+    background: #fff8dc;
+    border: 2px solid #f1c40f;
+    padding: 18px;
+    border-radius: 10px;
+    line-height: 1.5;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    border: 2px solid #d5d8dc;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 8px;
 }
 
 .answer {
@@ -55,24 +68,13 @@ h1 {
     margin-right: 10px;
 }
 
-input[type="text"],
-input[type="email"] {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 13px;
-    border: 2px solid #d5d8dc;
-    border-radius: 10px;
-    font-size: 16px;
-    margin-top: 8px;
-}
-
 button {
-    padding: 15px 25px;
+    padding: 15px 28px;
     border: none;
     border-radius: 12px;
     background: #2471a3;
     color: white;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -81,20 +83,18 @@ button:hover {
     background: #1b4f72;
 }
 
-.continue {
-    text-align: center;
-}
-
 #questionnaire {
     display: none;
 }
 
-.notice {
-    background: #fff8dc;
-    border: 2px solid #f1c40f;
-    padding: 18px;
-    border-radius: 10px;
-    margin: 15px 0;
+#complete {
+    display: none;
+    text-align: center;
+}
+
+.complete-text {
+    font-size: 40px;
+    font-weight: bold;
 }
 
 .bottom-note {
@@ -103,22 +103,6 @@ button:hover {
     text-align: center;
     margin-top: 25px;
 }
-
-#ipStatus {
-    display: none;
-    background: #eafaf1;
-    border-radius: 10px;
-    padding: 12px;
-    margin-top: 15px;
-}
-
-.success {
-    display: none;
-    background: #d5f5e3;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-}
 </style>
 </head>
 
@@ -126,9 +110,9 @@ button:hover {
 
 <div class="container">
 
-    <!-- CONSENT SCREEN -->
+    <!-- CONSENT -->
 
-    <div class="card" id="consentScreen">
+    <div class="card" id="consent">
 
         <h1>🍴 Fork Cult Questionnaire</h1>
 
@@ -137,29 +121,28 @@ button:hover {
             <strong>Privacy Notice</strong>
 
             <p>
-                Before continuing, please be aware that this website
-                can determine your public IP address.
+                Before continuing, please know that your
+                <strong>name and public IP address</strong>
+                will be sent to:
             </p>
 
             <p>
-                If you choose to continue, your IP address will be
-                displayed to you and may be used by the site for
-                visitor identification.
+                <strong>fmaurer100@gmail.com</strong>
             </p>
 
             <p>
-                You can choose not to continue.
+                By clicking <strong>I Understand & Continue</strong>,
+                you acknowledge this notice and agree to the collection
+                and submission of this information.
             </p>
 
         </div>
 
-        <div class="continue">
+        <br>
 
-            <button onclick="giveConsent()">
-                I Understand & Continue
-            </button>
-
-        </div>
+        <button onclick="startQuestionnaire()">
+            I Understand & Continue
+        </button>
 
     </div>
 
@@ -172,166 +155,115 @@ button:hover {
 
             <h1>🍴 Fork Cult Questionnaire 🍴</h1>
 
-            <p>
-                Welcome to the extremely serious Fork Cult Questionnaire.
-            </p>
-
-            <div id="ipStatus"></div>
-
-        </div>
-
-
-        <form
-            action="https://formsubmit.co/fmaurer100@gmail.com"
-            method="POST"
-            onsubmit="return validateForm()"
-        >
-
-            <input
-                type="hidden"
-                name="_subject"
-                value="🍴 New Fork Cult Questionnaire Response"
-            >
-
-            <input
-                type="hidden"
-                name="_template"
-                value="table"
-            >
-
-            <!-- IP is included only after explicit consent -->
-            <input
-                type="hidden"
-                name="Visitor IP"
-                id="visitorIP"
-                value=""
-            >
-
-
-            <!-- NAME -->
-
-            <div class="card">
-
-                <h3>👤 Your Name</h3>
-
+            <label>
+                <strong>Your Name</strong>
                 <input
                     type="text"
-                    name="Visitor Name"
                     id="name"
                     placeholder="Enter your name"
                     required
                 >
+            </label>
 
-            </div>
+            <br>
 
-
-            <!-- EMAIL -->
-
-            <div class="card">
-
-                <h3>📧 Your Email</h3>
-
+            <label>
+                <strong>Your Email</strong>
                 <input
                     type="email"
-                    name="Visitor Email"
                     id="email"
                     placeholder="you@example.com"
                     required
                 >
+            </label>
 
+        </div>
+
+
+        <div class="card">
+
+            <h3>Which is better?</h3>
+
+            <label class="answer">
+                <input
+                    type="radio"
+                    name="forks"
+                    value="Forks"
+                >
+                🍴 Forks
+            </label>
+
+            <label class="answer">
+                <input
+                    type="radio"
+                    name="forks"
+                    value="Spoons"
+                >
+                🥄 Spoons
+            </label>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Is the Fork Cult good?</h3>
+
+            <label class="answer">
+                <input
+                    type="radio"
+                    name="cult"
+                    value="Yes"
+                >
+                ✅ Yes
+            </label>
+
+            <label class="answer">
+                <input
+                    type="radio"
+                    name="cult"
+                    value="No"
+                >
+                ❌ No
+            </label>
+
+            <label class="answer">
+                <input
+                    type="radio"
+                    name="cult"
+                    value="Maybe"
+                >
+                🤔 Maybe
+            </label>
+
+        </div>
+
+
+        <div class="card" style="text-align:center">
+
+            <button onclick="submitQuestionnaire()">
+                🍴 Submit
+            </button>
+
+            <div class="bottom-note">
+                By submitting this questionnaire, you agree to
+                joining the Fork Cult. 🍴
             </div>
 
+        </div>
 
-            <!-- QUESTION 1 -->
-
-            <div class="card">
-
-                <div class="question-text">
-                    Which is better?
-                </div>
-
-                <label class="answer">
-                    <input
-                        type="radio"
-                        name="Which is better?"
-                        value="Forks"
-                    >
-                    🍴 Forks
-                </label>
-
-                <label class="answer">
-                    <input
-                        type="radio"
-                        name="Which is better?"
-                        value="Spoons"
-                    >
-                    🥄 Spoons
-                </label>
-
-            </div>
+    </div>
 
 
-            <!-- QUESTION 2 -->
+    <!-- COMPLETE -->
 
-            <div class="card">
+    <div class="card" id="complete">
 
-                <div class="question-text">
-                    Is the Fork Cult good?
-                </div>
+        <div class="complete-text">
+            COMPLETE
+        </div>
 
-                <label class="answer">
-                    <input
-                        type="radio"
-                        name="Is the Fork Cult good?"
-                        value="Yes"
-                    >
-                    ✅ Yes
-                </label>
-
-                <label class="answer">
-                    <input
-                        type="radio"
-                        name="Is the Fork Cult good?"
-                        value="No"
-                    >
-                    ❌ No
-                </label>
-
-                <label class="answer">
-                    <input
-                        type="radio"
-                        name="Is the Fork Cult good?"
-                        value="Maybe"
-                    >
-                    🤔 Maybe
-                </label>
-
-            </div>
-
-
-            <!-- SUBMIT -->
-
-            <div class="card" style="text-align:center">
-
-                <button type="submit">
-                    🍴 Submit Questionnaire
-                </button>
-
-                <div class="bottom-note">
-
-                    By submitting this questionnaire, you agree to
-                    joining the Fork Cult. 🍴
-
-                    <br><br>
-
-                    You have been informed that your public IP address
-                    may be used for visitor identification.
-
-                </div>
-
-            </div>
-
-        </form>
+        <p>🍴 Welcome to the Fork Cult.</p>
 
     </div>
 
@@ -341,61 +273,56 @@ button:hover {
 <script>
 
 let consentGiven = false;
+let visitorIP = "";
 
 
-// Called only when the visitor explicitly clicks
-// "I Understand & Continue"
+/*
+    The visitor must explicitly consent first.
+*/
 
-async function giveConsent() {
+async function startQuestionnaire() {
 
     consentGiven = true;
 
-    document.getElementById("consentScreen").style.display = "none";
+    document.getElementById("consent").style.display = "none";
 
     document.getElementById("questionnaire").style.display = "block";
 
 
-    // Get public IP after consent
+    /*
+        Get public IP after consent.
+    */
 
     try {
 
         const response =
-            await fetch("https://api.ipify.org?format=json");
+            await fetch(
+                "https://api.ipify.org?format=json"
+            );
 
         const data =
             await response.json();
 
-        document.getElementById("visitorIP").value =
-            data.ip;
+        visitorIP = data.ip;
 
-        document.getElementById("ipStatus").style.display =
-            "block";
+    } catch (error) {
 
-        document.getElementById("ipStatus").innerHTML =
-            "<strong>Your public IP:</strong> " + data.ip;
-
-    }
-
-    catch (error) {
-
-        document.getElementById("ipStatus").style.display =
-            "block";
-
-        document.getElementById("ipStatus").innerHTML =
-            "Unable to determine your public IP address.";
+        visitorIP = "Unable to determine";
 
     }
 
 }
 
 
-function validateForm() {
+async function submitQuestionnaire() {
 
     if (!consentGiven) {
 
-        alert("Please read the privacy notice and continue.");
+        alert(
+            "Please read the privacy notice first."
+        );
 
-        return false;
+        return;
 
     }
 
@@ -406,14 +333,14 @@ function validateForm() {
     const email =
         document.getElementById("email").value.trim();
 
-    const q1 =
+    const forks =
         document.querySelector(
-            'input[name="Which is better?"]:checked'
+            'input[name="forks"]:checked'
         );
 
-    const q2 =
+    const cult =
         document.querySelector(
-            'input[name="Is the Fork Cult good?"]:checked'
+            'input[name="cult"]:checked'
         );
 
 
@@ -421,7 +348,7 @@ function validateForm() {
 
         alert("Please enter your name.");
 
-        return false;
+        return;
 
     }
 
@@ -430,32 +357,137 @@ function validateForm() {
 
         alert("Please enter your email.");
 
-        return false;
+        return;
 
     }
 
 
-    if (!q1) {
+    if (!forks) {
 
-        alert("Please answer Question 1.");
+        alert("Please answer the forks question.");
 
-        return false;
-
-    }
-
-
-    if (!q2) {
-
-        alert("Please answer Question 2.");
-
-        return false;
+        return;
 
     }
 
 
-    return true;
+    if (!cult) {
+
+        alert("Please answer the Fork Cult question.");
+
+        return;
+
+    }
+
+
+    /*
+        If the IP request hasn't finished yet,
+        try once more before submitting.
+    */
+
+    if (!visitorIP) {
+
+        try {
+
+            const response =
+                await fetch(
+                    "https://api.ipify.org?format=json"
+                );
+
+            const data =
+                await response.json();
+
+            visitorIP = data.ip;
+
+        } catch (error) {
+
+            visitorIP = "Unable to determine";
+
+        }
+
+    }
+
+
+    /*
+        Send the information to FormSubmit.
+    */
+
+    const formData = new FormData();
+
+    formData.append(
+        "_subject",
+        "🍴 New Fork Cult Questionnaire"
+    );
+
+    formData.append(
+        "_template",
+        "table"
+    );
+
+    formData.append(
+        "Name",
+        name
+    );
+
+    formData.append(
+        "Email",
+        email
+    );
+
+    formData.append(
+        "Public IP Address",
+        visitorIP
+    );
+
+    formData.append(
+        "Which is better?",
+        forks.value
+    );
+
+    formData.append(
+        "Is the Fork Cult good?",
+        cult.value
+    );
+
+
+    try {
+
+        await fetch(
+            "https://formsubmit.co/fmaurer100@gmail.com",
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+
+        /*
+            Show COMPLETE.
+        */
+
+        document.getElementById(
+            "questionnaire"
+        ).style.display = "none";
+
+        document.getElementById(
+            "complete"
+        ).style.display = "block";
+
+
+    } catch (error) {
+
+        alert(
+            "Something went wrong submitting the questionnaire. Please try again."
+        );
+
+    }
 
 }
+
+</script>
+
+</body>
+</html>
 
 </script>
 
